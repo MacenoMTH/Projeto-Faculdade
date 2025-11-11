@@ -74,4 +74,7 @@ void inicializar_sistema(SistemaImobiliaria *sistema);
 void adicionar_imovel(SistemaImobiliaria *sistema, Imovel *imovel);
 void buscar_imoveis(SistemaImobiliaria *sistema, FiltroBusca *filtro, Imovel **resultados, int *num_resultados);
 
+// Declaração extern da variável global (apenas declara, não define)
+extern SistemaImobiliaria sistema;
+
 #endif
