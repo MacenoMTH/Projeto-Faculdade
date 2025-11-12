@@ -1,0 +1,36 @@
+/* Define o fundo da janela */
+#auth-window {
+    background-color: #f0f2f5; /* Um cinza claro para o fundo */
+}
+
+/* Esta é a "caixa" central do formulário */
+#auth-box {
+    background-color: #ffffff; /* Fundo branco para o "card" */
+    padding: 30px;
+    border-radius: 8px; /* Bordas arredondadas */
+    border: 1px solid #ddd; /* Borda sutil */
+    min-width: 300px;
+}
+
+/* Faz os campos de entrada e o combobox ocuparem a largura */
+entry, combobox {
+    min-width: 200px;
+    font-size: 14px;
+    padding: 5px;
+}
+
+/* Estiliza o botão de registro */
+#suggested-action-button {
+    background-color: #007bff; /* Azul vibrante */
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 10px; /* Espaço entre o formulário e o botão */
+}
+
+/* Efeito hover para o botão */
+#suggested-action-button:hover {
+    background-color: #0056b3; /* Azul mais escuro */
+}
