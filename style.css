@@ -1,15 +1,50 @@
+/*Estilo para o título "Bem-vindo(a)!" */
+#welcome-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px; 
+}
+
+/* Ajuste nos botões para terem a mesma largura */
+#suggested-action-button, #secondary-action-button {
+    min-width: 200px;
+}
+
+/* NOVO: Estilo para o botão de ação secundário (Cinza) */
+#secondary-action-button {
+    background-color: #e9ecef; /* Cinza claro */
+    color: #333; /* Texto escuro */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px; 
+}
+
+#secondary-action-button:hover {
+    background-color: #d1d5db; /* Cinza um pouco mais escuro */
+}
 /* Define o fundo da janela */
 #auth-window {
-    background-color: #f0f2f5; /* Um cinza claro para o fundo */
+    background-color: #f0f2f5; 
 }
 
 /* Esta é a "caixa" central do formulário */
 #auth-box {
-    background-color: #ffffff; /* Fundo branco para o "card" */
+    background-color: #ffffff;
     padding: 30px;
-    border-radius: 8px; /* Bordas arredondadas */
-    border: 1px solid #ddd; /* Borda sutil */
+    border-radius: 8px;
+    border: 1px solid #ddd;
     min-width: 300px;
+}
+
+/* NOVO: Estilo para o título "Bem-vindo(a)!" */
+#welcome-label {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px; /* Adiciona espaço abaixo do título */
 }
 
 /* Faz os campos de entrada e o combobox ocuparem a largura */
@@ -19,18 +54,34 @@ entry, combobox {
     padding: 5px;
 }
 
-/* Estiliza o botão de registro */
+/* Botão de ação principal (Azul) */
 #suggested-action-button {
-    background-color: #007bff; /* Azul vibrante */
-    color: white;
+    background-color: #007bff;
+    color: #333;
     font-weight: bold;
     font-size: 14px;
     padding: 10px;
     border-radius: 5px;
-    margin-top: 10px; /* Espaço entre o formulário e o botão */
+    margin-top: 10px;
+    min-width: 200px; /* Garante que os botões tenham a mesma largura */
 }
 
-/* Efeito hover para o botão */
 #suggested-action-button:hover {
-    background-color: #0056b3; /* Azul mais escuro */
+    background-color: #0056b3;
+}
+
+/* NOVO: Estilo para o botão de ação secundário (Cinza) */
+#secondary-action-button {
+    background-color: #e9ecef; /* Cinza claro */
+    color: #333; /* Texto escuro */
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px; /* Menos espaço que o principal */
+    min-width: 200px; /* Garante que os botões tenham a mesma largura */
+}
+
+#secondary-action-button:hover {
+    background-color: #d1d5db; /* Cinza um pouco mais escuro */
 }
