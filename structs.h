@@ -15,17 +15,18 @@ typedef struct {
     char nome[50];
     char email[50];
     char telefone[15];
+    char senha[50]; // Adicionei campo senha
 } Usuario;
 
 typedef struct {
     Usuario base;
-    Imovel *imoveis[10]; // Array de ponteiros para imóveis
+    Imovel *imoveis[10];
     int num_imoveis;
 } Locador;
 
 typedef struct {
     Usuario base;
-    char preferencias[100]; // Ex: "Casa com 3 quartos"
+    char preferencias[100];
     float orcamento;
 } Comprador;
 
@@ -40,9 +41,9 @@ typedef struct {
     Imovel *imovel;
     Usuario *comprador_alugador;
     Usuario *locador;
-    char tipo[10]; // "Venda" ou "Aluguel"
+    char tipo[10];
     float valor;
-    char data[11]; // YYYY-MM-DD
+    char data[11];
 } Transacao;
 
 typedef struct {
@@ -72,9 +73,10 @@ typedef struct {
 // Declarações de funções
 void inicializar_sistema(SistemaImobiliaria *sistema);
 void adicionar_imovel(SistemaImobiliaria *sistema, Imovel *imovel);
-void buscar_imoveis(SistemaImobiliaria *sistema, FiltroBusca *filtro, Imovel **resultados, int *num_resultados);
+int registrar_usuario(ListaUsuarios *lista, char *nome, char *email, char *senha, char *tipo);
+void criar_tela_registro(ListaUsuarios *lista);
 
-// Declaração extern da variável global (apenas declara, não define)
+// Variável global
 extern SistemaImobiliaria sistema;
 
 #endif
