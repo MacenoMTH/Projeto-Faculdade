@@ -1,82 +1,46 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#include <stdlib.h>
+#include <string.h>
+#include "structs.h"
 
-typedef struct {
-    int id;
-    char endereco[100];
-    char tipo[20]; // Casa, Apartamento, etc.
-    float preco;
-    int quartos;
-    int disponivel; // 1 = sim, 0 = não
-} Imovel;
+// Definir variável global
+SistemaImobiliaria sistema;
 
-typedef struct {
-    int id;
-    char nome[50];
-    char email[50];
-    char telefone[15];
-    char senha[50]; // Adicionei campo senha
-} Usuario;
+void inicializar_sistema(SistemaImobiliaria *sistema) {
+    sistema->imoveis.tamanho = 0;
+    sistema->usuarios.tamanho = 0;
+    sistema->num_transacoes = 0;
+}
 
-typedef struct {
-    Usuario base;
-    Imovel *imoveis[10];
-    int num_imoveis;
-} Locador;
+void adicionar_imovel(SistemaImobiliaria *sistema, Imovel *imovel) {
+    if (sistema->imoveis.tamanho < 100) {
+        sistema->imoveis.imoveis[sistema->imoveis.tamanho] = imovel;
+        sistema->imoveis.tamanho++;
+    }
+}
 
-typedef struct {
-    Usuario base;
-    char preferencias[100];
-    float orcamento;
-} Comprador;
+int registrar_usuario(ListaUsuarios *lista, char *nome, char *email, char *senha, char *tipo) {
+    // Verificar se e-mail já existe
+    for (int i = 0; i < lista->tamanho; i++) {
+        if (strcmp(lista->usuarios[i]->email, email) == 0) {
+            return 0; // Já existe
+        }
+    }
 
-typedef struct {
-    Usuario base;
-    char preferencias[100];
-    float orcamento_mensal;
-} Alugador;
+    // Criar novo usuário
+    Usuario *novo = malloc(sizeof(Usuario));
+    novo->id = lista->tamanho + 1;
+    strcpy(novo->nome, nome);
+    strcpy(novo->email, email);
+    strcpy(novo->senha, senha); // Em produção, use hash!
+    strcpy(novo->telefone, "");
 
-typedef struct {
-    int id;
-    Imovel *imovel;
-    Usuario *comprador_alugador;
-    Usuario *locador;
-    char tipo[10];
-    float valor;
-    char data[11];
-} Transacao;
-
-typedef struct {
-    Imovel *imoveis[100];
-    int tamanho;
-} ListaImoveis;
-
-typedef struct {
-    Usuario *usuarios[100];
-    int tamanho;
-} ListaUsuarios;
-
-typedef struct {
-    char tipo[20];
-    float preco_min;
-    float preco_max;
-    int quartos_min;
-} FiltroBusca;
-
-typedef struct {
-    ListaImoveis imoveis;
-    ListaUsuarios usuarios;
-    Transacao *transacoes[100];
-    int num_transacoes;
-} SistemaImobiliaria;
-
-// Declarações de funções
-void inicializar_sistema(SistemaImobiliaria *sistema);
-void adicionar_imovel(SistemaImobiliaria *sistema, Imovel *imovel);
-int registrar_usuario(ListaUsuarios *lista, char *nome, char *email, char *senha, char *tipo);
-void criar_tela_registro(ListaUsuarios *lista);
-
-// Variável global
-extern SistemaImobiliaria sistema;
-
-#endif
+    // Adicionar à lista
+    if (lista->tamanho < 100) {
+        lista->usuarios[lista->tamanho] = novo;
+        lista->tamanho++;
+        return 1; // Sucesso
+    }
+    
+    free(novo);
+    return 0; // Lista cheia
+}
