@@ -85,3 +85,7 @@ entry, combobox {
 #secondary-action-button:hover {
     background-color: #d1d5db; /* Cinza um pouco mais escuro */
 }
+/* Arredonda as bordas de TODAS as imagens */
+GtkImage {
+    border-radius: 12px;
+}
