@@ -1,5 +1,6 @@
 /* gui.c */
 #include <string.h>
+#include "home.h"
 #include "gui.h" // Inclui nosso header com os protótipos e structs
 
 /* --- Estrutura de Callback (para tela de Registro) --- */
@@ -77,47 +78,83 @@ void on_registrar_clicked(GtkWidget *widget, gpointer data) {
         return;
     }
 
-    // if (registrar_usuario(cb_data->lista, (char *)nome, (char *)email, (char *)senha, (char *)tipo)) {
-    // Simulação de sucesso (troque pelo seu 'registrar_usuario' real)
-    if (strcmp(email, "email@jaexiste.com") != 0) { 
-        GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(cb_data->window),
-                                                   GTK_DIALOG_MODAL, GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
-                                                   "Usuário registrado com sucesso!");
-        gtk_dialog_run(GTK_DIALOG(dialog));
-        gtk_widget_destroy(dialog);
+if (strcmp(email, "email@jaexiste.com") != 0) { 
+    GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(cb_data->window),
+                                            GTK_DIALOG_MODAL,
+                                            GTK_MESSAGE_INFO,
+                                            GTK_BUTTONS_OK,
+                                            "Usuário registrado com sucesso!");
+    
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
+    
+   // 1. Destrói a janela ATUAL (a de registro)
+    gtk_widget_destroy(cb_data->window);
+    
+    // 2. Chama a NOVA tela (a home)
+    criar_tela_home(cb_data->lista);
 
-        gtk_entry_set_text(GTK_ENTRY(cb_data->entry_nome), "");
-        gtk_entry_set_text(GTK_ENTRY(cb_data->entry_email), "");
-        gtk_entry_set_text(GTK_ENTRY(cb_data->entry_senha), "");
-    } else {
-        GtkWidget *dialog = gtk_message_dialog_new(GTK_WINDOW(cb_data->window),
-                                                   GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_OK,
-                                                   "E-mail já cadastrado!");
-        gtk_dialog_run(GTK_DIALOG(dialog));
-        gtk_widget_destroy(dialog);
-    }
+} else {
+// ... (código de erro)
+}
 }
 
+// Chamado quando o botão "Voltar" é clicado
+void on_voltar_para_inicial_clicked(GtkWidget *widget, gpointer data)
+{
+    // 1. Pega a lista de usuários (passada como 'data')
+    ListaUsuarios *lista = (ListaUsuarios *)data;
 
-/* --- TELA 1: Tela de Login (Placeholder) --- */
-/* (NOVA FUNÇÃO) */
-void criar_tela_login(ListaUsuarios *lista) {
+    // 2. Pega a janela atual (a de login) a partir do 'widget' (o botão)
+    GtkWidget *login_window = gtk_widget_get_toplevel(widget);
+
+    // 3. Destrói a janela de login
+    gtk_widget_destroy(login_window);
+
+    // 4. Chama a função que cria a tela inicial
+    criar_tela_inicial(lista);
+}
+
+/* TELA 1: Tela de Login (Placeholder) */
+void criar_tela_login(ListaUsuarios *lista)
+{
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_title(GTK_WINDOW(window), "Login");
     gtk_window_set_default_size(GTK_WINDOW(window), 300, 200);
     gtk_widget_set_name(window, "auth-window"); // Reusa o CSS
 
+    // Precisamos de uma VBox para organizar o label e o botão
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 10);
+    gtk_widget_set_halign(vbox, GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(vbox, GTK_ALIGN_CENTER);
+    gtk_container_add(GTK_CONTAINER(window), vbox);
+
+
     GtkWidget *label = gtk_label_new("Tela de Login (A ser implementada)");
-    gtk_container_add(GTK_CONTAINER(window), label);
+    gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
+
+
+    /* --- ADICIONE O BOTÃO VOLTAR AQUI --- */
+
+    GtkWidget *btn_voltar = gtk_button_new_with_label("← Voltar");
+    
+    // (Opcional) Usar o mesmo estilo do botão "Criar Nova Conta"
+    gtk_widget_set_name(btn_voltar, "secondary-action-button"); 
+
+    // Conecta o clique do botão à função de callback que criamos
+    g_signal_connect(btn_voltar, "clicked", 
+                     G_CALLBACK(on_voltar_para_inicial_clicked), 
+                     lista); // Passa a lista para o callback
+
+    // Adiciona o botão na VBox
+    gtk_box_pack_start(GTK_BOX(vbox), btn_voltar, FALSE, FALSE, 10);
+
 
     gtk_widget_show_all(window);
 }
 
-
 /* --- TELA 2: Tela de Registro --- */
-/* (Quase igual ao seu código, mas note que a chamada 'carregar_css()' foi REMOVIDA
-   porque ela agora é chamada no main.c) */
 void criar_tela_registro(ListaUsuarios *lista) {
     // A LINHA 'carregar_css()' FOI REMOVIDA DAQUI!
 
@@ -196,7 +233,6 @@ void criar_tela_inicial(ListaUsuarios *lista) {
     gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
     gtk_window_set_default_size(GTK_WINDOW(window), 400, 350);
     gtk_widget_set_name(window, "auth-window"); // Reusa o CSS
-    g_signal_connect(window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     GtkWidget *header = gtk_header_bar_new();
     gtk_header_bar_set_show_close_button(GTK_HEADER_BAR(header), TRUE);
