@@ -1,7 +1,7 @@
 # Regresso Imobiliária 🏡
 
 **Sistema desktop de compra e aluguel de imóveis**  
-Desenvolvido em **C puro + GTK 4**  
+Desenvolvido em **C puro + GTK 3**  
 Grupo: Gabriel Rosa, João Nick, Matheus Maceno, Erick Alan.
 
 ### Funcionalidades entregues
@@ -25,7 +25,7 @@ Grupo: Gabriel Rosa, João Nick, Matheus Maceno, Erick Alan.
 
 ### Tecnologias usadas
 - Linguagem: C99
-- Interface: GTK 4
+- Interface: GTK 3
 - Ferramenta auxiliar: GitHub Copilot (usado como assistente de código — todas as decisões e revisões foram nossas)
 
 ### Como executar
