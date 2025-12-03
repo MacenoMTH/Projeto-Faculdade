@@ -1,4 +1,3 @@
-/* main.c */
 #include "structs.h"
 #include "gui.h"     // Inclui nosso "índice" de funções da GUI
 

@@ -1,87 +1,229 @@
-/*Estilo para o título "Bem-vindo(a)!" */
-#welcome-label {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px; 
+/* ===== Geral e tipografia ===== */
+* { font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; }
+window, #home-window { background-color: #f8f9fa; }
+
+/* ===== Sidebar ===== */
+#sidebar {
+    background: linear-gradient(180deg,#2f3f4f 0%, #34495e 100%);
+    color: #fff;
+    padding: 20px;
+    min-width: 280px;
+    box-shadow: 2px 0 14px rgba(0,0,0,0.08);
+    border-right: 1px solid rgba(255,255,255,0.03);
 }
 
-/* Ajuste nos botões para terem a mesma largura */
-#suggested-action-button, #secondary-action-button {
-    min-width: 200px;
+/* Logo da sidebar: centralizado, com sombra e sem distorção */
+#sidebar #sidebar-logo {
+    display: block;
+    margin: 6px auto 12px auto;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
+    padding: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.30);
+    max-width: 240px;
+    max-height: 140px;
 }
 
-/* NOVO: Estilo para o botão de ação secundário (Cinza) */
-#secondary-action-button {
-    background-color: #e9ecef; /* Cinza claro */
-    color: #333; /* Texto escuro */
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 5px; 
-}
+/* Texto branco em widgets do sidebar */
+#sidebar label, #sidebar * { color: #ffffff; }
 
-#secondary-action-button:hover {
-    background-color: #d1d5db; /* Cinza um pouco mais escuro */
-}
-/* Define o fundo da janela */
-#auth-window {
-    background-color: #f0f2f5; 
-}
-
-/* Esta é a "caixa" central do formulário */
-#auth-box {
-    background-color: #ffffff;
-    padding: 30px;
+/* Frames dos filtros neutralizados (aparência limpa) */
+#sidebar GtkFrame {
+    background: transparent;
     border-radius: 8px;
-    border: 1px solid #ddd;
-    min-width: 300px;
+    margin-bottom: 10px;
+    border: none;
 }
+#sidebar .filter-frame { color: #fff; }
 
-/* NOVO: Estilo para o título "Bem-vindo(a)!" */
-#welcome-label {
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 10px; /* Adiciona espaço abaixo do título */
-}
-
-/* Faz os campos de entrada e o combobox ocuparem a largura */
-entry, combobox {
-    min-width: 200px;
-    font-size: 14px;
-    padding: 5px;
-}
-
-/* Botão de ação principal (Azul) */
-#suggested-action-button {
-    background-color: #007bff;
-    color: #333;
-    font-weight: bold;
-    font-size: 14px;
+/* Botão aplicar filtros */
+#sidebar .primary-action {
+    background: linear-gradient(135deg,#2980b9 0%,#1f618d 100%);
+    color: #fff;
+    border-radius: 8px;
     padding: 10px;
-    border-radius: 5px;
-    margin-top: 10px;
-    min-width: 200px; /* Garante que os botões tenham a mesma largura */
+    width: 100%;
+    font-weight: 600;
 }
 
-#suggested-action-button:hover {
-    background-color: #0056b3;
+/* ===== Header ===== */
+#main-header {
+    padding: 16px 20px;
+    background: transparent;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-/* NOVO: Estilo para o botão de ação secundário (Cinza) */
-#secondary-action-button {
-    background-color: #e9ecef; /* Cinza claro */
-    color: #333; /* Texto escuro */
-    font-weight: bold;
-    font-size: 14px;
-    padding: 10px;
-    border-radius: 5px;
-    margin-top: 5px; /* Menos espaço que o principal */
-    min-width: 200px; /* Garante que os botões tenham a mesma largura */
+/* Barra de busca - centralizada e maior */
+#search-entry {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    font-size: 16px;
+    min-width: 580px;
+    min-height: 48px;
+    border: 2px solid transparent;
+    transition: all 200ms ease;
 }
 
-#secondary-action-button:hover {
-    background-color: #d1d5db; /* Cinza um pouco mais escuro */
+#search-entry:focus {
+    box-shadow: 0 8px 24px rgba(25, 118, 210, 0.15);
+    border: 2px solid #1976d2;
+}
+
+/* ===== Cards ===== */
+/* Card container */
+.imovel-card,
+#imovel-card,
+.imovel-card-btn {
+    border-radius: 12px;
+    background: #ffffff;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+
+/* Remove decoração do botão que envolve o card */
+#imovel-card-btn,
+.imovel-card-btn {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+/* Hover dos cards - efeito sutil */
+.imovel-card:hover,
+.imovel-card-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.10);
+}
+
+/* Imagem do card: centralizada e com cantos arredondados no topo */
+#imovel-image {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: 150px; /* reduzido de 180px */
+    box-shadow: inset 0 -40px 60px rgba(0,0,0,0.04);
+    object-fit: cover;
+}
+
+/* Overlay sutil sobre a imagem */
+.imovel-card { position: relative; }
+
+/* Texto dentro do card */
+.imovel-card label,
+.imovel-card * { color: #222; }
+.imovel-card .preco { color: #d32f2f; font-weight: 700; font-size: 15px; }
+
+/* Botões */
+#card-action-button,
+.primary-action {
+    background: linear-gradient(135deg,#1976d2 0%,#1565c0 100%);
+    color: #fff;
+    border-radius: 6px;
+    padding: 8px 14px;
+    border: none;
+    font-weight: 600;
+    font-size: 12px;
+    transition: all 150ms ease;
+}
+
+#card-action-button:hover,
+.primary-action:hover {
+    background: linear-gradient(135deg,#1565c0 0%,#0d47a1 100%);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.25);
+}
+
+/* Botões secundários */
+.secondary-action {
+    background: #e9ecef;
+    color: #222;
+    border-radius: 6px;
+    padding: 8px 12px;
+    border: none;
+    font-size: 13px;
+}
+
+/* FlowBox spacing - 4 cards por linha */
+GtkFlowBox { 
+    margin-top: 8px; 
+    margin-bottom: 12px; 
+}
+
+/* ===== Detalhes ===== */
+.detail-image {
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+    max-width: 720px;
+    max-height: 480px;
+}
+
+/* ===== Tipografia geral ===== */
+label, .imovel-card * {
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    color: #222;
+}
+
+/* ===== Ajustes de responsividade/espacamento ===== */
+.content-container { padding: 6px 8px; }
+.imovel-card { width: 280px; }
+
+/* ===== TELA INICIAL / LOGIN styling ===== */
+#auth-window { background: transparent; }
+#auth-box { padding: 12px 18px; background: rgba(255,255,255,0.02); border-radius: 12px; }
+#welcome-label { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+
+/* Logo / imagens nas telas de auth: bordas arredondadas, sombra e sem distorcer */
+#auth-box image,
+#auth-box GtkImage,
+#auth-box #auth-logo,
+#sidebar #sidebar-logo {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+    background: rgba(255,255,255,0.02);
+    padding: 6px;
+    max-width: 360px;
+    max-height: 140px;
+    image-rendering: optimizeQuality;
+}
+
+/* botões da auth */
+.suggested-action-button,
+.primary-action { min-width: 220px; min-height: 44px; }
+.secondary-action { min-width: 220px; min-height: 44px; }
+
+/* ===== Ajustes finais ===== */
+.detail-image, #sidebar #sidebar-logo { image-rendering: optimizeQuality; }
+/* Mantém compatibilidade com regras anteriores */
+
+/* ===== Notebook / Abas ===== */
+#imovel-notebook {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+#imovel-notebook tab {
+    padding: 12px 20px;
+    background-color: #e9ecef;
+    border-radius: 8px 8px 0 0;
+    margin-right: 6px;
+    font-weight: 500;
+    transition: all 150ms ease;
+}
+
+#imovel-notebook tab:hover {
+    background-color: #dee2e6;
+}
+
+#imovel-notebook tab:active {
+    background-color: #fff;
+    border-bottom: 3px solid #1976d2;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
 }
