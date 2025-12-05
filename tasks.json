@@ -7,19 +7,19 @@
             "command": "gcc",
             "args": [
                 "-g",
-                "main.c",
+                "src/main.c",
+                "src/gui.c",
+                "src/home.c",
+                "src/structs.c",
                 "-o",
-                "sistema",
-                "`pkg-config", 
-                "--cflags", 
-                "--libs", 
-                "gtk+-3.0`"
+                "bin/app.exe",
+                "`pkg-config --cflags --libs gtk+-3.0`"
             ],
+            "problemMatcher": ["$gcc"],
             "group": {
                 "kind": "build",
                 "isDefault": true
-            },
-            "problemMatcher": []
+            }
         }
     ]
 }
